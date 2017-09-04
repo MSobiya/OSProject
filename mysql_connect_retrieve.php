@@ -12,18 +12,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 $sql = "SELECT * FROM os_table";
-$query=mysqli_query($conn,$sql);
+$result=mysqli_query($conn,$sql);
 
-$id=[];
-$ip=[];
-$pc_no=[];
-$status=[];
-$last_update=[];
+$response=array();
 
-if($query){
-	while($row=mysqli_fetch_array($query,MYSQLI_ASSOC)){
-	$r[]=$row;
-	}
+while($row=mysqli_fetch_array($result)){
+	array_push($response, array("kid"=>$row[0],"kip"=>$row[1],"kpc_no"=>$row[2],"kstatus"=>$row[3],"klast_update"=>$row[4]));
 }
-echo json_encode($r);
+echo json_encode(array("server_response"=>$response));
+mysqli_close($conn);
 ?>
