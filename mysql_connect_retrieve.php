@@ -11,7 +11,7 @@
  if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
  }
- $sql = "SELECT * FROM os_table WHERE DATE_ADD(last_update, INTERVAL 10 MINUTE) >= NOW()";
+ $sql = "SELECT * FROM os_table WHERE DATE_ADD(last_update, INTERVAL 10 MINUTE) >= NOW() ORDER BY lab_no";
  $query=mysqli_query($conn,$sql);
 
 
